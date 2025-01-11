@@ -1,5 +1,37 @@
-import { use } from "react";
 import { useState } from "react";
+
+const AddButton = ({ addNewPerson }) => {
+  return (
+    <div>
+      <button type="submit" onClick={addNewPerson}>
+        add
+      </button>
+    </div>
+  );
+};
+
+const PersonForm = ({ handleNameChange, handleNumberChange, addNewPerson }) => {
+  return (
+    <form>
+      <div>
+        name: <input onChange={handleNameChange} />
+      </div>
+      <div>
+        number: <input onChange={handleNumberChange} />
+      </div>
+      <AddButton addNewPerson={addNewPerson} />
+    </form>
+  );
+};
+
+const Filter = ({ handleFilterChange }) => {
+  return (
+    <div>
+      filter shown with
+      <input onChange={handleFilterChange} />
+    </div>
+  );
+};
 
 const Display = ({ persons }) => {
   return (
@@ -89,24 +121,15 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <div>
-        filter shown with
-        <input onChange={handleFilterChange} />
+        <Filter handleFilterChange={handleFilterChange} />
+        <h3>Add a new</h3>
       </div>
-      <form>
-        <div>
-          <h1>add a new</h1>
-          name: <input onChange={handleNameChange} />
-        </div>
-        <div>
-          number: <input onChange={handleNumberChange} />
-        </div>
-        <div>
-          <button type="submit" onClick={addNewPerson}>
-            add
-          </button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
+      <PersonForm
+        handleNameChange={handleNameChange}
+        handleNumberChange={handleNumberChange}
+        addNewPerson={addNewPerson}
+      />
+      <h3>Numbers</h3>
       <Display persons={personsToShow()} />
     </div>
   );
